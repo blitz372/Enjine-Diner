@@ -1,0 +1,23 @@
+<header>
+  <div class="container">
+    <a href="#" class="logo">ENJINE Diner</a>
+    <nav>
+      <ul>
+        <li><a href="#" (click)="updateView('order')">Order</a></li>
+        <li><a href="#" (click)="updateView('checkout')">Checkout</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <app-order
+    *ngIf="view === 'order'"
+    (onChanged)="updateOrders($event)"
+  ></app-order>
+  <app-checkout
+    *ngIf="view === 'checkout'"
+    [orders]="orders"
+    (onSubmit)="submit()"
+  ></app-checkout>
+</div>

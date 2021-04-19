@@ -1,0 +1,29 @@
+<div class="side-selector" (click)="update(side.name)">
+  <mat-radio-button [checked]="checked">
+    <span class="product-name">{{ side.name }}</span>
+  </mat-radio-button>
+  <ng-template [ngIf]="checked">
+    <mat-form-field *ngIf="side.options" appearance="fill">
+      <mat-label>{{ side.modifierName }}</mat-label>
+      <mat-select
+        [(value)]="selectedChoice"
+        (selectionChange)="changeDropdown($event)"
+      >
+        <mat-option *ngFor="let option of side.options" [value]="option">{{
+          option
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="!side.options" appearance="fill">
+      <mat-label>{{ side.modifierName }}</mat-label>
+      <input
+        matInput
+        type="number"
+        [min]="1"
+        [(ngModel)]="selectedChoice"
+        (change)="changeInput($event)"
+      />
+    </mat-form-field>
+  </ng-template>
+</div>

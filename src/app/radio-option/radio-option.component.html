@@ -1,0 +1,9 @@
+<section class="options">
+  <h2>{{ title }} <span class="title-info">(Choose 1)</span></h2>
+
+  <mat-radio-group [(ngModel)]="selectedChoice">
+    <mat-radio-button *ngFor="let choice of option.choices" (click)="clickRadio(choice)">
+      {{ choice }}
+    </mat-radio-button>
+  </mat-radio-group>
+</section>

@@ -1,0 +1,23 @@
+.item-card {
+  padding: 1em;
+  width: 500px;
+  height: 550px;
+  position: relative;
+
+  img {
+    width: 500px;
+    height: auto;
+  }
+
+  .description {
+    color: grey;
+  }
+
+  .add-button {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    background-color: orange;
+    color: white;
+  }
+}

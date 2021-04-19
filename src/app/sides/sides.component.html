@@ -1,0 +1,11 @@
+<section class="options">
+  <h2>Sides</h2>
+
+  <app-side-selector
+    *ngFor="let side of sides"
+    [side]="side"
+    [checked]="selectedSide === side.name"
+    (onChanged)="updateChoice($event)"
+    (changeSide)="selectSide($event)"
+  ></app-side-selector>
+</section>

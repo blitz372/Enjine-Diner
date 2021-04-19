@@ -1,0 +1,12 @@
+<section class="options">
+    <h2>{{ option.name }} <span class="title-info">(Choose 1)</span></h2>
+  
+    <mat-form-field appearance="fill">
+        <mat-label>Choose One</mat-label>
+        <mat-select [(value)]="selectedOption" (selectionChange)="changeOption($event)" style="padding: 0px;">
+          <mat-option *ngFor="let choice of option.choices" [value]="choice">{{
+            choice
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  </section>

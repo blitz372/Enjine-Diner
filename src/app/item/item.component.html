@@ -1,0 +1,8 @@
+<mat-card class="item-card">
+  <img [src]="item.image" [alt]="item.name" />
+  <h1>{{ item.name }}</h1>
+  <p class="description">
+    {{ item.description }}
+  </p>
+    <button mat-raised-button class="add-button" (click)="openItem()">Add</button>
+</mat-card>

@@ -1,0 +1,13 @@
+<section class="options">
+  <h2>
+    {{ option.name }}
+    <span class="title-info">(Choose up to {{ option.limit }})</span>
+  </h2>
+  <mat-checkbox
+    *ngFor="let choice of option.choices"
+    (change)="onChange(choice, $event)"
+    [checked]="this.selected[choice]"
+    [disabled]="!this.selected[choice] && count == option.limit"
+    >{{ choice }}</mat-checkbox
+  >
+</section>

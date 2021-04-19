@@ -1,0 +1,11 @@
+<mat-card class="order-card">
+  <mat-card-title>Add Item</mat-card-title>
+  <mat-card-content class="order-content">
+    <app-item
+      *ngFor="let item of items"
+      [item]="item"
+      (onChanged)="addOrder($event)"
+    >
+    </app-item>
+  </mat-card-content>
+</mat-card>
