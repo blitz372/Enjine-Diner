@@ -5,8 +5,12 @@
   position: relative;
 
   img {
-    width: 500px;
+    max-width: 500px;
+    max-height: 350px;
+    width: auto;
     height: auto;
+    margin: auto;
+    display: block;
   }
 
   .description {

@@ -11,9 +11,9 @@ export class OrderComponent implements OnInit {
 
   items: Product[] = [
     {
-      name: 'Hamubrger',
+      name: 'Hamburger',
       image:
-        'https://image.similarpng.com/thumbnail/2020/04/Floating-burger-PNG.png',
+        'https://tastesbetterfromscratch.com/wp-content/uploads/2020/06/Hamburger-recipe-7-500x500.jpg',
       description:
         'Bite into a nice juicy, fresh-cooked burger! Comes with your choice of fries or salad.',
       option: {
@@ -39,7 +39,8 @@ export class OrderComponent implements OnInit {
       name: 'Steak',
       image:
         'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2007/1/2/0/valentines_steak.jpg.rend.hgtvcom.616.462.suffix/1557859049553.jpeg',
-      description: 'Lorem ipsum dolor sit amet',
+      description:
+        'Our ribeye is slow-cooked and ready to fall off the bone. Get it now with a choice of salad or baked potatoes.',
       option: {
         name: 'Doneness',
         limit: 1,
