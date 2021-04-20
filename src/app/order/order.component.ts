@@ -7,7 +7,7 @@ import { Order, Product } from 'src/types';
   styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent implements OnInit {
-  @Output() onChanged: EventEmitter<Order[]> = new EventEmitter();
+  @Output() onChanged: EventEmitter<Order> = new EventEmitter();
 
   items: Product[] = [
     {
@@ -60,14 +60,12 @@ export class OrderComponent implements OnInit {
       ],
     },
   ];
-  orders: Order[] = [];
 
   constructor() {}
 
   ngOnInit(): void {}
 
   addOrder(order: Order) {
-    this.orders.push(order);
-    this.onChanged.emit(this.orders);
+    this.onChanged.emit(order);
   }
 }

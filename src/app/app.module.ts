@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -20,7 +20,6 @@ import { ItemModalComponent } from './item-modal/item-modal.component';
 import { OrderComponent } from './order/order.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ItemComponent } from './item/item.component';
-import { RadioOptionComponent } from './radio-option/radio-option.component';
 import { CheckboxOptionComponent } from './checkbox-option/checkbox-option.component';
 import { SidesComponent } from './sides/sides.component';
 import { SideSelectorComponent } from './side-selector/side-selector.component';
@@ -35,7 +34,6 @@ import { CounterComponent } from './counter/counter.component';
     CheckoutComponent,
     ItemComponent,
     ItemModalComponent,
-    RadioOptionComponent,
     CheckboxOptionComponent,
     SidesComponent,
     SideSelectorComponent,
@@ -48,7 +46,7 @@ import { CounterComponent } from './counter/counter.component';
     AppRoutingModule,
     NoopAnimationsModule,
     MatCardModule,
-    FormsModule,
+    ReactiveFormsModule,
     MatCheckboxModule,
     MatDialogModule,
     MatRadioModule,
@@ -58,7 +56,7 @@ import { CounterComponent } from './counter/counter.component';
     MatFormFieldModule,
     MatTableModule,
   ],
-  providers: [],
+  providers: [SideSelectorComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

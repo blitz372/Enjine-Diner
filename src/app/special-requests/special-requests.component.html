@@ -1,13 +1,11 @@
 <div class="section">
   <h2>Special Requests</h2>
   <mat-form-field appearance="outline" class="request-box">
-    <mat-label>Special Requests</mat-label>
     <textarea
       matInput
       type="text"
       placeholder="Please enter any food allergies or things we should be wary of"
-      [(ngModel)]="requests"
-      (change)="updateRequests($event)"
+      [formControlName]="controlName"
     ></textarea>
   </mat-form-field>
 </div>

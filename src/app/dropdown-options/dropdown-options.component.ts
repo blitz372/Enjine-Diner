@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { Option } from 'src/types';
 
@@ -6,21 +7,37 @@ import { Option } from 'src/types';
   selector: 'app-dropdown-options',
   templateUrl: './dropdown-options.component.html',
   styleUrls: ['./dropdown-options.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: DropdownOptionsComponent,
+      multi: true,
+    },
+  ],
 })
-export class DropdownOptionsComponent implements OnInit {
+export class DropdownOptionsComponent implements ControlValueAccessor {
   @Input() title: string = '';
   @Input() option: Option;
 
-  @Output() itemChanged: EventEmitter<string> = new EventEmitter();
-
-  selectedOption = '';
+  value = '';
+  onChange: (value: string) => void;
+  onTouched: () => void;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  writeValue(obj: any): void {}
+
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
 
   changeOption(changeEvent: MatSelectChange): void {
-    this.selectedOption = changeEvent.value;
-    this.itemChanged.emit(this.selectedOption);
+    this.value = changeEvent.value;
+    this.onChange(this.value);
+    this.onTouched();
   }
 }

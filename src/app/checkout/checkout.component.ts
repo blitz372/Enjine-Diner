@@ -19,4 +19,8 @@ export class CheckoutComponent implements OnInit {
   submit() {
     this.onSubmit.emit();
   }
+
+  optionType(element: any): string {
+    return typeof element;
+  }
 }

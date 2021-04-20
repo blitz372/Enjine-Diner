@@ -1,22 +1,19 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ControlContainer, FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-special-requests',
   templateUrl: './special-requests.component.html',
-  styleUrls: ['./special-requests.component.scss']
+  styleUrls: ['./special-requests.component.scss'],
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useExisting: FormGroupDirective,
+    },
+  ],
 })
-export class SpecialRequestsComponent implements OnInit {
-  @Output() onChanged: EventEmitter<string> = new EventEmitter();
+export class SpecialRequestsComponent {
+  @Input() controlName: string;
 
-  requests: string = "";
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  updateRequests(e: any) {
-    this.onChanged.emit(this.requests);
-  }
-
+  constructor() {}
 }

@@ -4,8 +4,8 @@
   <app-side-selector
     *ngFor="let side of sides"
     [side]="side"
-    [checked]="selectedSide === side.name"
-    (onChanged)="updateChoice($event)"
-    (changeSide)="selectSide($event)"
+    [formControlName]="controlName"
+    [checked]="selected === side.name"
+    (click)="selectSide(side.name)"
   ></app-side-selector>
 </section>

@@ -15,8 +15,8 @@ export class AppComponent {
     this.view = view;
   }
 
-  updateOrders(orders: Order[]) {
-    this.orders = orders;
+  addOrder(order: Order) {
+    this.orders.push(order);
   }
 
   submit() {

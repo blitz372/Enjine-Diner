@@ -5,11 +5,16 @@
       <ng-container matColumnDef="order">
         <th mat-header-cell *matHeaderCellDef>Order</th>
         <td mat-cell *matCellDef="let order">
-          <h3>{{ order.product }}</h3>
-          <p *ngIf="order.option">
-            <b>{{ order.option.name }}:</b>
-            {{ order.option.selected.join(", ") }}
-          </p>
+          <h3>{{ order.itemName }}</h3>
+          <div *ngIf="order.options">
+            <b>{{ order.optionsName }}:</b>
+            <p *ngIf="optionType(order.options) === 'string'">
+              {{ order.options }}
+            </p>
+            <p *ngIf="optionType(order.options) === 'object'">
+              {{ order.options.join(", ") }}
+            </p>
+          </div>
           <p>
             <b>Side:</b> {{ order.side.side }} | {{ order.side.modifierName }}:
             {{ order.side.sideModifier || "N/A" }}

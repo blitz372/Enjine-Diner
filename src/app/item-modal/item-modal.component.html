@@ -1,32 +1,29 @@
 <div>
   <mat-dialog-content>
-    <img [src]="item.image" alt="{{ item.name }}" />
-    <h1>{{ item.name }}</h1>
-    <p class="description">
-      {{ item.description }}
-    </p>
-    <app-dropdown-options
-      *ngIf="item.option.limit === 1"
-      [option]="item.option"
-      (itemChanged)="updateOptions([$event])"
-    ></app-dropdown-options>
-    <app-checkbox-option
-      *ngIf="item.option.limit > 1"
-      [option]="item.option"
-      (itemChanged)="updateOptions($event)"
-    ></app-checkbox-option>
-    <app-sides
-      [sides]="item.sides"
-      (onChanged)="updateSide($event)"
-    ></app-sides>
-    <app-special-requests
-      (onChanged)="updateRequests($event)"
-    ></app-special-requests>
-    <app-counter
-      (onChanged)="updateQuantity($event)"
-      [min]="1"
-      class="item-counter"
-    ></app-counter>
+    <form [formGroup]="form">
+      <img [src]="item.image" alt="{{ item.name }}" />
+      <h1>{{ item.name }}</h1>
+      <p class="description">
+        {{ item.description }}
+      </p>
+      <app-dropdown-options
+        *ngIf="item.option.limit === 1"
+        [option]="item.option"
+        formControlName="options"
+      ></app-dropdown-options>
+      <app-checkbox-option
+        *ngIf="item.option.limit > 1"
+        [option]="item.option"
+        formControlName="options"
+      ></app-checkbox-option>
+      <app-sides [sides]="item.sides" controlName="side"></app-sides>
+      <app-special-requests controlName="requests"></app-special-requests>
+      <app-counter
+        [min]="1"
+        class="item-counter"
+        formControlName="quantity"
+      ></app-counter>
+    </form>
   </mat-dialog-content>
   <mat-dialog-actions class="actions">
     <button mat-stroked-button mat-dialog-close mat-dialog-close="cancel">
@@ -35,9 +32,9 @@
     <button
       mat-raised-button
       mat-dialog-close
-      [mat-dialog-close]="order"
+      [mat-dialog-close]="form.value"
       class="btn-primary"
-      [disabled]="!isOrderValid()"
+      [disabled]="!form.valid"
     >
       Order
     </button>

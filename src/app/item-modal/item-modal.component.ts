@@ -1,4 +1,12 @@
 import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Option, Order, OrderOption, Product, SideChange } from 'src/types';
 
@@ -8,50 +16,49 @@ import { Option, Order, OrderOption, Product, SideChange } from 'src/types';
   styleUrls: ['./item-modal.component.scss'],
 })
 export class ItemModalComponent implements OnInit {
-  @Output() onChanged: EventEmitter<Order> = new EventEmitter();
+  @Output() submit: EventEmitter<Order> = new EventEmitter();
 
-  order: Order = {
-    product: '',
-    quantity: 1,
-    requests: '',
-    side: null,
-    option: null,
-  };
+  form: FormGroup;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public item: Product) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public item: Product,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.order.product = this.item.name;
+    const side = this.item.sides[0];
+    this.form = this.fb.group({
+      itemName: new FormControl(this.item.name, [Validators.required]),
+      options: new FormControl(null, [this.optionsValidator.bind(this)]),
+      optionsName: new FormControl(this.item.option.name, [
+        Validators.required,
+      ]),
+      side: new FormControl(null, [
+        Validators.required,
+        this.sideQuantityValidator(1),
+      ]),
+      requests: new FormControl(''),
+      quantity: new FormControl(1, [Validators.required, Validators.min(1)]),
+    });
   }
 
-  updateQuantity(quantity: number): void {
-    this.order.quantity = quantity;
+  sideQuantityValidator(min: number): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      let valid =
+        control.value === null ||
+        typeof control.value.sideModifier === 'string' ||
+        control.value.sideModifier >= min;
+      return valid ? null : { sideQuantity: { value: control.value } };
+    };
   }
 
-  updateSide(side: SideChange): void {
-    this.order.side = side;
-  }
-
-  updateOptions(choices: string[]): void {
-    if (!this.order.option) {
-      this.order.option = { name: this.item.option.name, selected: choices };
-    }
-    this.order.option.selected = choices;
-  }
-
-  updateRequests(requests: string): void {
-    this.order.requests = requests;
-  }
-
-  isOrderValid(): boolean {
-    return (
-      !!this.order.product &&
-      !!this.order.side &&
-      (!!this.order.option || this.item.option.limit > 1)
-    );
-  }
-
-  submitOrder(): void {
-    this.onChanged.emit(this.order);
+  optionsValidator(control: AbstractControl): { [key: string]: any } | null {
+    // Valid if array (checkbox) or if string (dropdown)
+    let valid =
+      (typeof control.value === 'object' && this.item.option.limit > 1) ||
+      (this.item.option.limit === 1 &&
+        typeof control.value === 'string' &&
+        control.value !== '');
+    return valid ? null : { options: { value: control.value } };
   }
 }

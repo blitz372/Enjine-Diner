@@ -13,7 +13,7 @@
 <div class="container">
   <app-order
     *ngIf="view === 'order'"
-    (onChanged)="updateOrders($event)"
+    (onChanged)="addOrder($event)"
   ></app-order>
   <app-checkout
     *ngIf="view === 'checkout'"

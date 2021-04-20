@@ -5,7 +5,7 @@
   </h2>
   <mat-checkbox
     *ngFor="let choice of option.choices"
-    (change)="onChange(choice, $event)"
+    (change)="update(choice, $event)"
     [checked]="this.selected[choice]"
     [disabled]="!this.selected[choice] && count == option.limit"
     >{{ choice }}</mat-checkbox

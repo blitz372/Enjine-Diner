@@ -25,9 +25,10 @@ export interface SideChange {
 }
 
 export interface Order {
-  product: string;
+  itemName: string;
   quantity: number;
-  option: OrderOption;
+  options: string[];
+  optionsName: string;
   side: SideChange | null;
   requests: string;
 }

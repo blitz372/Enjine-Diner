@@ -10,7 +10,7 @@ import { ItemModalComponent } from '../item-modal/item-modal.component';
 })
 export class ItemComponent implements OnInit {
   @Input() item: Product;
-  @Output() onChanged: EventEmitter<Order> = new EventEmitter();
+  @Output() added: EventEmitter<Order> = new EventEmitter();
 
   constructor(public dialog: MatDialog) {}
 
@@ -21,7 +21,7 @@ export class ItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: string | Order) => {
       if (result !== undefined && result !== 'cancel') {
-        this.onChanged.emit(result as Order);
+        this.added.emit(result as Order);
       }
     });
   }
